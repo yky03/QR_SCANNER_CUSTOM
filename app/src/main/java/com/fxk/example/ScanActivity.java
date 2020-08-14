@@ -75,6 +75,13 @@ public class ScanActivity extends AppCompatActivity {
                 //result.getContents() -> Scanned: {"name" : "xxxx", "address" : "xxx" , ...} json 형식의 QR을 SCAN할 경우
 
                 // success todo , JSON 데이터 파싱 후 API 호출
+                
+                //SCAN DATA에 필수값이 포함되지 않으면 QR처리 X
+                if(result.getContents().indexOf("ip") == -1
+                        || result.getContents().indexOf("name") == -1
+                        || result.getContents().indexOf("address") == -1){
+                    return;
+                }
 
                 //QR DATA JSON 파싱
                 qrDTO = jsonParsing(result.getContents());
